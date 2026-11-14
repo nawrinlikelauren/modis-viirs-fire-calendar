@@ -1,0 +1,30 @@
+working folder: /Users/nawrinsikder/Documents/GitHub/modis-viirs-fire-calendar
+csv files found: ['data/raw/modis/modis_2025_Bangladesh.csv', 'data/raw/viirs/viirs-jpss1_2025_Bangladesh.csv']
+
+== data/raw/modis/modis_2025_Bangladesh.csv
+rows: 2247
+columns: ['latitude', 'longitude', 'brightness', 'scan', 'track', 'acq_date', 'acq_time', 'satellite', 'instrument', 'confidence', 'version', 'bright_t31', 'frp', 'daynight', 'type']
+dates: 2025-01-04 to 2025-12-31
+satellite {'Aqua': 2019, 'Terra': 228}
+instrument {'MODIS': 2247}
+confidence {100: 118, 76: 58, 66: 58, 75: 57, 67: 55, 78: 52}
+daynight {'D': 2118, 'N': 129}
+type {0: 2237, 2: 10}
+   latitude  longitude  brightness  scan  track    acq_date  acq_time satellite instrument  confidence  version  bright_t31   frp daynight  type
+0   23.9999    91.2035       303.4   3.3    1.7  2025-01-04       730      Aqua      MODIS          30    61.03       290.1  10.9        D     0
+1   22.8722    92.0413       307.0   1.0    1.0  2025-01-05       809      Aqua      MODIS          45    61.03       294.5   4.8        D     0
+2   23.7106    90.9132       314.8   1.0    1.0  2025-01-05       809      Aqua      MODIS          70    61.03       296.3   9.1        D     0
+
+== data/raw/viirs/viirs-jpss1_2025_Bangladesh.csv
+rows: 8550
+columns: ['latitude', 'longitude', 'bright_ti4', 'scan', 'track', 'acq_date', 'acq_time', 'satellite', 'instrument', 'confidence', 'version', 'bright_ti5', 'frp', 'daynight', 'type']
+dates: 2025-01-01 to 2025-12-31
+satellite {'N20': 8550}
+instrument {'VIIRS': 8550}
+confidence {'n': 7181, 'l': 932, 'h': 437}
+daynight {'D': 7375, 'N': 1175}
+type {0: 8275, 2: 185, 3: 90}
+   latitude  longitude  bright_ti4  scan  track    acq_date  acq_time satellite instrument confidence  version  bright_ti5   frp daynight  type
+0  21.52868   91.87494      330.35  0.37   0.58  2025-01-01       623       N20      VIIRS          n        2      297.72  3.38        D     0
+1  24.67689   89.06838      325.36  0.48   0.64  2025-01-01       624       N20      VIIRS          n        2      291.98  2.88        D     0
+2  23.53343   89.66071      367.00  0.33   0.55  2025-01-02       745       N20      VIIRS          h        2      294.69  5.70        D     0
