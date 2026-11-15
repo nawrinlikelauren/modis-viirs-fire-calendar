@@ -17,6 +17,13 @@ def load():
     w = m.pivot(index="month", columns="sensor", values="hotspots").sort_index()
     w.columns = [c.lower() for c in w.columns]
 
+    full = pd.date_range(w.index.min(), w.index.max(), freq="MS")
+    w = w.reindex(full)
+    w.index.name = "month"
+    w["modis"] = w["modis"].fillna(0)
+    first, last = w["viirs"].first_valid_index(), w["viirs"].last_valid_index()
+    w.loc[first:last, "viirs"] = w.loc[first:last, "viirs"].fillna(0)
+
     # Two conversion ratios (VIIRS -> MODIS scale), fitted on 2020-2023 overlap
     both = w.dropna(subset=["modis", "viirs"])
     train = both[both.index <= TRAIN_END]
