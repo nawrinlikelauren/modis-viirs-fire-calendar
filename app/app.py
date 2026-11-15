@@ -24,7 +24,7 @@ def load():
     first, last = w["viirs"].first_valid_index(), w["viirs"].last_valid_index()
     w.loc[first:last, "viirs"] = w.loc[first:last, "viirs"].fillna(0)
 
-    # Two conversion ratios (VIIRS -> MODIS scale), fitted on 2020-2023 overlap
+    # Two conversion ratios (VIIRS to MODIS scale), fitted on 2020-2023 overlap
     both = w.dropna(subset=["modis", "viirs"])
     train = both[both.index <= TRAIN_END]
     hi, lo = train[train.viirs >= CUT], train[train.viirs < CUT]
@@ -52,7 +52,7 @@ col = "harmonized" if series_label.startswith("Harmonized") else "viirs_converte
 yr_range = st.sidebar.slider("Years", min(years), max(years), (min(years), max(years)))
 sub = df[df.year.between(*yr_range)]
 
-# --- Calendar heatmap ---
+# Calendar heatmap
 pivot = sub.pivot(index="year", columns="month_num", values=col)
 pivot.columns = [calendar.month_abbr[i] for i in pivot.columns]
 fig = px.imshow(
@@ -65,7 +65,7 @@ fig = px.imshow(
 fig.update_yaxes(type="category")
 st.plotly_chart(fig, use_container_width=True)
 
-# --- Month vs history ---
+# Month vs history
 st.subheader("Compare a month with its history")
 c1, c2 = st.columns(2)
 sel_year = c1.selectbox("Year", years, index=len(years) - 1)
@@ -85,7 +85,7 @@ else:
     if median > 0:
         m3.metric("Compared with median", f"{(value / median - 1):+.0%}")
 
-# --- Download ---
+# Download data
 out = sub[["month", "modis", "viirs", "viirs_converted", "harmonized", "source"]]
 st.download_button(
     "Download CSV", out.to_csv(index=False), "burning_calendar_bangladesh.csv", "text/csv"
@@ -97,6 +97,6 @@ with st.expander("Method and limitations"):
         f"{r_hi:.3f} for months with 1,000+ VIIRS detections and {r_lo:.3f} for other months. "
         "Validated on 2024, which was held out. Wherever MODIS was observed, the harmonized "
         "series uses the observed MODIS count. The conversion only fills months where MODIS is "
-        "missing. Limits: one country, one held-out year, a cutoff chosen by eye, and no "
+        "missing. Limits: one country, one held-out year, a cutoff chosen by inspecting the data, and no "
         "S-NPP file for 2025."
     )
