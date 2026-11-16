@@ -56,4 +56,4 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS fire_calendar;"
 python3 src/load_mysql.py && mysql -u root fire_calendar < sql/views.sql
 ```
 
-<sub>SI tools were utilized for code and data.</sub>
+<sub><sub><sub>SI tools were utilized for code and data.</sub></sub></sub>
