@@ -5,7 +5,7 @@ Team: Hotspot Harmonization (solo)
 Live app: https://modis-viirs-fire-calendar.streamlit.app
 
 This project demonstrates a data pipeline as well as a web application that compares two different satellite fire records in Bangladesh with a MODIS calendar from 2000-2025 and a VIIRS overlap used for calibration from 2020-2025. It is aimed at emergency responders, land managers and scientists who need insight on fire activity. 
-
+s
 ![Burning activity calendar](docs/app.png)
 
 **Key Results**
@@ -40,3 +40,18 @@ Utilizing two ratios gave the closest match as busy and quiet months require dif
 - One country as well as two tested years (2024, 2025). The method is reasonable but no proof as of now of how well it works in other years or countries. 
 - MODIS 2000 to 2002 is likely undercounted as only one MODIS satellite was operating. 
 - App reads CSV files, not MySQL so SQL views and app are separate. 
+
+**Next Steps**
+- Test with more countries beyond Bangladesh 
+- Add a region picker to the app
+
+**Run it**
+```bash
+pip install -r requirements.txt
+python3 src/clean_and_aggregate.py && python3 src/calibrate.py && python3 src/calibrate2.py
+streamlit run app/app.py
+
+# Loading into MySQL is optional 
+mysql -u root -e "CREATE DATABASE IF NOT EXISTS fire_calendar;"
+python3 src/load_mysql.py && mysql -u root fire_calendar < sql/views.sql
+```
